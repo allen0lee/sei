@@ -1,16 +1,18 @@
 var box1 = document.querySelector('.box-1');
 var box2 = document.querySelector('.box-2');
 var box3 = document.querySelector('.box-3');
-
 var box4 = document.querySelector('.box-4');
 var box5 = document.querySelector('.box-5');
 var box6 = document.querySelector('.box-6');
-
 var box7 = document.querySelector('.box-7');
 var box8 = document.querySelector('.box-8');
 var box9 = document.querySelector('.box-9');
 
-var boxItems = document.querySelectorAll('.box');
+var setFooter = document.querySelector('footer');
+var startGameBtn = document.querySelector('.start-game-btn');
+
+//var boxItems = document.querySelectorAll('.box');
+var boxItems = null;
 
 var color = 'red';
 var nextColor = 'green';
@@ -80,10 +82,14 @@ var judgeWin = function() {
 var handleClickBox = function(event) {
     if(nextColor == 'green') {
         event.target.style.backgroundColor = 'red'; //handle current color
+        event.target.classList.add('clicked');
+
         color = 'red';
         nextColor = 'red';
     } else {
         event.target.style.backgroundColor = 'green';
+        event.target.classList.add('clicked');
+
         color = 'green';
         nextColor = 'green';
     }
@@ -93,19 +99,48 @@ var handleClickBox = function(event) {
     console.log(clickCounter);
     if(isWin == false) {
         judgeWin();
+    } 
+    if(isWin == false && document.querySelectorAll('.clicked').length == boxItems.length) {
+        setFooter.textContent = `tie game`;
+        boxItems = null;
     }
-    
+    if(isWin == true) {
+        //boxItems = null;
+        setFooter.textContent = `${color} is winner`; 
+        boxItems = null;
+    }
+
+    /*
+    if (clickCounter == 9 && isWin == false) {
+        //boxItems = null;
+        //alert('tie game');
+    }
+    */
 }
 
-//setMark('red');
-console.log('red is first to move');
-//decideWhoMoveNext();
+var handleStartGame = function() {
+    if(boxItems == null) {
+        boxItems = document.querySelectorAll('.box');
+        boxItems.forEach(function(item) {
+            item.addEventListener('click', handleClickBox);
+        });
+    }
+}
 
-//judgeWin();
-
+/*
 boxItems.forEach(function(item) {
     item.addEventListener('click', handleClickBox);
 });
+*/
+
+startGameBtn.addEventListener('click', handleStartGame);
+
+
+console.log('red is first to move');
+//alert('red is first to move');
+
+
+
 
 
 

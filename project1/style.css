@@ -4,6 +4,25 @@
 
 .container {
     display: flex;
+    justify-content: space-between;
+    border: 2px solid purple;
+}
+
+aside {
+    margin: 2rem;
+    width: 30%;
+    border: 2px, solid yellow;
+}
+
+main {
+    width: 60%;
+    border: 2px, solid gray;
+}
+
+.main-container {
+    display: flex;
+    margin: 2rem;
+    border: 2px solid green;
 }
 
 .first-column div {
