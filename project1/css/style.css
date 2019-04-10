@@ -10,37 +10,37 @@
 
 aside {
     margin: 2rem;
-    width: 30%;
+    width: 10%;
     border: 2px, solid yellow;
 }
 
 main {
-    width: 60%;
+    width: 80%;
     border: 2px, solid gray;
 }
 
 .main-container {
     display: flex;
     margin: 2rem;
-    border: 2px solid green;
+    /*border: 2px solid green;*/
 }
 
 .first-column div {
     border: 1px solid black;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
 }
 
 .second-column div {
     border: 1px solid black;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
 }
 
 .third-column div {
     border: 1px solid black;
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 200px;
 }
 
 /*
@@ -49,6 +49,18 @@ main {
     border-right: none;
 }
 */
+
+.x-clicked {
+    background-image: url("../images/x.png");
+}
+
+.x-clicked img {
+    width: 100%;
+}
+
+.o-clicked {
+    background-image: url("../images/o.png");
+}
 
 
 
