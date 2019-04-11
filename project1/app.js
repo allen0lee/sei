@@ -19,6 +19,15 @@ var nextMark = 'O';
 var isWin = false;
 var clickCounter = 0;
 
+/*
+var getPlayerMark = function() {
+    return currentMark;
+}
+
+var setPlayerMark = function(mark) {
+    currentMark = mark;
+}
+*/
 
 var judgeWin = function() {
     //win in first column   
@@ -136,7 +145,9 @@ var handleClickBox = function(event) {
     } 
     if(isWin == false && document.querySelectorAll('.clicked').length == boxItems.length) {
     //if(isWin == false && clickCounter == boxItems.length) {
-        setGameMessage.textContent = `tie game`;
+        setTimeout(function() {
+            setGameMessage.textContent = `Tie game.`;
+        }, 1000);
         for(var i = 0; i < boxItems.length; i++) { // disable all boxes, make them not clickable
             boxItems[i].classList.add('clicked');
         }
@@ -175,8 +186,6 @@ boxItems.forEach(function(item) {
     item.addEventListener('click', handleClickBox);
 });
 
-
-console.log('x is first to move');
 
 
 
