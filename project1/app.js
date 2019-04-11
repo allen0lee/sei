@@ -143,10 +143,14 @@ var handleClickBox = function(event) {
     }
     if(isWin == true) {
         if(currentMark == 'X') {
-            setGameMessage.textContent = `Player 1 wins.`; 
+            setTimeout(function() {
+                setGameMessage.textContent = `Player 1 wins.`; 
+            }, 1000);
         }
         if(currentMark == 'O') {
-            setGameMessage.textContent = `Player 2 wins.`; 
+            setTimeout(function() {
+                setGameMessage.textContent = `Player 2 wins.`; 
+            }, 1000);
         }
         
         for(var i = 0; i < boxItems.length; i++) { // disable all boxes, make them not clickable

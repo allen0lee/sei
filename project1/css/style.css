@@ -2,44 +2,50 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Raleway';
+    color: gray;
+    font-size: 2rem;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
-    border: 2px solid purple;
+    /*border: 2px solid purple;*/
 }
 
 aside {
     margin: 2rem;
-    width: 20%;
-    border: 2px, solid yellow;
+    width: 30%;
+    /*border: 2px, solid yellow;*/
 }
 
 main {
     width: 70%;
-    border: 2px, solid gray;
+    /*border: 2px, solid gray;*/
 }
 
 .main-container {
     display: flex;
-    /*margin: 2rem 0rem 2rem 10rem;*/
-    margin: 2rem 0rem 2rem 0rem;
+    margin: 2rem 0rem 2rem 10rem;
+    /*margin: 2rem 0rem 2rem 0rem;*/
     /*border: 2px solid green;*/
 }
 
 .first-column div {
-    border: 1px solid black;
+    border: 0.5px solid black;
     height: 200px;
     width: 200px;
 }
 
 .second-column div {
-    border: 1px solid black;
+    border: 0.5px solid black;
     height: 200px;
     width: 200px;
 }
 
 .third-column div {
-    border: 1px solid black;
+    border: 0.5px solid black;
     height: 200px;
     width: 200px;
 }
