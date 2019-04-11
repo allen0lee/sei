@@ -9,25 +9,26 @@ var box8 = document.querySelector('.box-8');
 var box9 = document.querySelector('.box-9');
 
 var setGameMessage = document.querySelector('.game-message');
-//var startGameBtn = document.querySelector('.start-game-btn');
+var setPlayer1Mark = document.querySelector('.player-1');
+var setPlayer2Mark = document.querySelector('.player-2');
+var startGameBtn = document.querySelector('.start-game-btn');
+var resetGameBtn = document.querySelector('.reset-game-btn');
+
+var isStartClicked = false;
 
 var boxItems = document.querySelectorAll('.box');
 
-var currentMark = 'X';
-var nextMark = 'O';
+//var currentMark = 'X';
+//var nextMark = 'O';
+
+var currentMark = '';
+var nextMark = '';
+var chosenMark = '';
 
 var isWin = false;
+var isTie = false;
 var clickCounter = 0;
 
-/*
-var getPlayerMark = function() {
-    return currentMark;
-}
-
-var setPlayerMark = function(mark) {
-    currentMark = mark;
-}
-*/
 
 var judgeWin = function() {
     //win in first column   
@@ -58,7 +59,7 @@ var judgeWin = function() {
         setTimeout(function() {
             box7.classList.add('win');
             box8.classList.add('win');
-            box9.classList.add('win');
+            box9.classList.add('win');    
         }, 500);
     }
     //win in first row
@@ -78,7 +79,7 @@ var judgeWin = function() {
         setTimeout(function() {
             box2.classList.add('win');
             box5.classList.add('win');
-            box8.classList.add('win');
+            box8.classList.add('win');        
         }, 500);
     }
     //win in third row
@@ -88,7 +89,7 @@ var judgeWin = function() {
         setTimeout(function() {
             box3.classList.add('win');
             box6.classList.add('win');
-            box9.classList.add('win');
+            box9.classList.add('win');            
         }, 500);
     }
     //win in box 1, 5, 9
@@ -108,10 +109,9 @@ var judgeWin = function() {
         setTimeout(function() {
             box3.classList.add('win');
             box5.classList.add('win');
-            box7.classList.add('win');
+            box7.classList.add('win');        
         }, 500);
     }
-    
 }
 
 var handleClickBox = function(event) {
@@ -125,7 +125,9 @@ var handleClickBox = function(event) {
                 nextMark = 'X';
             }
         }
-    } else {
+    }
+
+    if(nextMark == 'X') {
         if(!(event.target.classList.contains('clicked'))) {
             event.target.classList.add('clicked');
             if((!event.target.classList.contains('o-clicked'))) {
@@ -143,48 +145,106 @@ var handleClickBox = function(event) {
     if(isWin == false) {
         judgeWin();
     } 
+
     if(isWin == false && document.querySelectorAll('.clicked').length == boxItems.length) {
     //if(isWin == false && clickCounter == boxItems.length) {
         setTimeout(function() {
             setGameMessage.textContent = `Tie game.`;
         }, 1000);
-        for(var i = 0; i < boxItems.length; i++) { // disable all boxes, make them not clickable
-            boxItems[i].classList.add('clicked');
-        }
+
+        isTie = true;
+
+        boxItems.forEach(function(item) {
+            item.classList.add('clicked');
+        });
     }
+
     if(isWin == true) {
         if(currentMark == 'X') {
             setTimeout(function() {
-                setGameMessage.textContent = `Player 1 wins.`; 
+                setGameMessage.textContent = `X wins.`; 
             }, 1000);
         }
+
         if(currentMark == 'O') {
             setTimeout(function() {
-                setGameMessage.textContent = `Player 2 wins.`; 
+                setGameMessage.textContent = `O wins.`; 
             }, 1000);
         }
-        
-        for(var i = 0; i < boxItems.length; i++) { // disable all boxes, make them not clickable
-           boxItems[i].classList.add('clicked');
-        }
+
+        boxItems.forEach(function(item) {
+            item.classList.add('clicked');
+        });
     }
 }
 
-/*
-//only enables box 1-9 clickable after clicking "Start"
-var handleStartGame = function() {
-    var boxItems = document.querySelectorAll('.box');
-    boxItems.forEach(function(item) {
-        item.addEventListener('click', handleClickBox);
-    });  
+var choosePlayerMark = function() {
+    currentMark = prompt('Player 1, choose your mark: O or X');
+    if(currentMark == 'X') {
+        chosenMark = currentMark;
+        nextMark = 'O';
+        setPlayer1Mark.textContent = 'Player 1: X';
+        setPlayer2Mark.textContent = 'Player 2: O';
+    } else if(currentMark == 'O') {
+        chosenMark = currentMark;
+        nextMark = 'X';
+        setPlayer1Mark.textContent = 'Player 1: O';
+        setPlayer2Mark.textContent = 'Player 2: X';
+    } else {
+        alert('Please choose O or X');
+    }
 }
-*/
 
-//startGameBtn.addEventListener('click', handleStartGame);
+var resetGame = function() {    
+    boxItems.forEach(function(item) {
+        item.classList.remove('win');
+        item.classList.remove('o-clicked');
+        item.classList.remove('x-clicked');
+        item.classList.remove('clicked');
+        item.value = null;
+    });
+
+    setGameMessage.textContent = null;
+
+    if(isWin == true || isTie == true) {
+        currentMark = chosenMark;
+        if(currentMark == 'X') {
+            nextMark = 'O';
+        } else if(currentMark == 'O') {
+            nextMark = 'X';
+        }
+    }
+
+    isWin = false; 
+    isTie = false;
+}
+
+var handleStartGame = function() {
+    if(isStartClicked == false) {
+        choosePlayerMark();
+        isStartClicked = true;
+    } else if(isStartClicked == true){
+        //location.reload(); //reload the page
+        resetGame();
+        setPlayer1Mark.textContent = null;
+        setPlayer2Mark.textContent = null;
+        choosePlayerMark();
+    }
+}
+
+var handleResetGame = function() {
+    resetGame();
+}
+
+startGameBtn.addEventListener('click', handleStartGame);
+resetGameBtn.addEventListener('click', handleResetGame);
 
 boxItems.forEach(function(item) {
     item.addEventListener('click', handleClickBox);
 });
+
+
+
 
 
 
