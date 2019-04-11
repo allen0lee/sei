@@ -8,11 +8,15 @@ var box7 = document.querySelector('.box-7');
 var box8 = document.querySelector('.box-8');
 var box9 = document.querySelector('.box-9');
 
-var setGameMessage = document.querySelector('.game-message');
+var setWinMessage = document.querySelector('.win-message');
 var setPlayer1Mark = document.querySelector('.player-1');
 var setPlayer2Mark = document.querySelector('.player-2');
 var startGameBtn = document.querySelector('.start-game-btn');
 var resetGameBtn = document.querySelector('.reset-game-btn');
+var countPlayer1win = document.querySelector('.player1-win-counter');
+var countPlayer2win = document.querySelector('.player2-win-counter');
+//var setWinPlayer1 = document.querySelector('win-player-1');
+//var setWinPlayer2 = document.querySelector('win-player-2');
 
 var isStartClicked = false;
 
@@ -23,12 +27,25 @@ var boxItems = document.querySelectorAll('.box');
 
 var currentMark = '';
 var nextMark = '';
-var chosenMark = '';
+var player1ChosenMark = '';
 
 var isWin = false;
 var isTie = false;
 var clickCounter = 0;
 
+var player1WinCounter = 0;
+var player2WinCounter = 0;
+
+
+var countWin = function() {
+    if(player1ChosenMark == currentMark) {
+        player1WinCounter += 1;
+        countPlayer1win.textContent = `${player1WinCounter}`;
+    } else {
+        player2WinCounter += 1;
+        countPlayer2win.textContent = `${player2WinCounter}`;
+    }
+}
 
 var judgeWin = function() {
     //win in first column   
@@ -149,8 +166,8 @@ var handleClickBox = function(event) {
     if(isWin == false && document.querySelectorAll('.clicked').length == boxItems.length) {
     //if(isWin == false && clickCounter == boxItems.length) {
         setTimeout(function() {
-            setGameMessage.textContent = `Tie game.`;
-        }, 1000);
+            setWinMessage.textContent = `Tie game`;
+        }, 500);
 
         isTie = true;
 
@@ -162,14 +179,40 @@ var handleClickBox = function(event) {
     if(isWin == true) {
         if(currentMark == 'X') {
             setTimeout(function() {
-                setGameMessage.textContent = `X wins.`; 
-            }, 1000);
+                setWinMessage.textContent = `X`; 
+            }, 500);
+
+            setTimeout(function() {
+                countWin();
+            }, 500);
+
+            
+            //setWinPlayer1.textContent = 'X';
+            
         }
 
         if(currentMark == 'O') {
             setTimeout(function() {
-                setGameMessage.textContent = `O wins.`; 
-            }, 1000);
+                setWinMessage.textContent = `O`; 
+            }, 500);
+            //player2WinCounter += 1;
+            ////setWinPlayer2.textContent = 'O';
+            //countPlayer2win.textContent = `${player2WinCounter}`;
+            
+            /*
+            if(player1ChosenMark == currentMark) {
+                player1WinCounter += 1;
+                countPlayer1win.textContent = `${player1WinCounter}`;
+            }
+            else {
+                player2WinCounter += 1;
+                countPlayer2win.textContent = `${player2WinCounter}`;
+            }
+            */
+
+            setTimeout(function() {
+                countWin();
+            }, 500);
         }
 
         boxItems.forEach(function(item) {
@@ -181,15 +224,15 @@ var handleClickBox = function(event) {
 var choosePlayerMark = function() {
     currentMark = prompt('Player 1, choose your mark: O or X');
     if(currentMark == 'X') {
-        chosenMark = currentMark;
+        player1ChosenMark = currentMark;
         nextMark = 'O';
-        setPlayer1Mark.textContent = 'Player 1: X';
-        setPlayer2Mark.textContent = 'Player 2: O';
+        setPlayer1Mark.textContent = 'X';
+        setPlayer2Mark.textContent = 'O';
     } else if(currentMark == 'O') {
-        chosenMark = currentMark;
+        player1ChosenMark = currentMark;
         nextMark = 'X';
-        setPlayer1Mark.textContent = 'Player 1: O';
-        setPlayer2Mark.textContent = 'Player 2: X';
+        setPlayer1Mark.textContent = 'O';
+        setPlayer2Mark.textContent = 'X';
     } else {
         alert('Please choose O or X');
     }
@@ -204,10 +247,10 @@ var resetGame = function() {
         item.value = null;
     });
 
-    setGameMessage.textContent = null;
+    setWinMessage.textContent = null;
 
     if(isWin == true || isTie == true) {
-        currentMark = chosenMark;
+        currentMark = player1ChosenMark;
         if(currentMark == 'X') {
             nextMark = 'O';
         } else if(currentMark == 'O') {
