@@ -8,7 +8,7 @@ var box7 = document.querySelector('.box-7');
 var box8 = document.querySelector('.box-8');
 var box9 = document.querySelector('.box-9');
 
-var setGameMessage = document.querySelector('p');
+var setGameMessage = document.querySelector('.game-message');
 //var startGameBtn = document.querySelector('.start-game-btn');
 
 var boxItems = document.querySelectorAll('.box');
@@ -25,41 +25,82 @@ var judgeWin = function() {
     if((box1.value == box2.value) && (box2.value == box3.value) && (box1.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        //win animation effect(css) goes here
+        setTimeout(function() {
+            box1.classList.add('win');
+            box2.classList.add('win');
+            box3.classList.add('win');
+        }, 500);
     }
     //win in second column
     if((box4.value == box5.value) && (box5.value == box6.value) && (box4.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box4.classList.add('win');
+            box5.classList.add('win');
+            box6.classList.add('win');
+        }, 500);
     }
     //win in third column
     if((box7.value == box8.value) && (box8.value == box9.value) && (box7.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box7.classList.add('win');
+            box8.classList.add('win');
+            box9.classList.add('win');
+        }, 500);
     }
     //win in first row
     if((box1.value == box4.value) && (box4.value == box7.value) && (box1.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box1.classList.add('win');
+            box4.classList.add('win');
+            box7.classList.add('win');
+        }, 500);
     }
     //win in second row
     if((box2.value == box5.value) && (box5.value == box8.value) && (box2.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box2.classList.add('win');
+            box5.classList.add('win');
+            box8.classList.add('win');
+        }, 500);
     }
     //win in third row
     if((box3.value == box6.value) && (box6.value == box9.value) && (box3.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box3.classList.add('win');
+            box6.classList.add('win');
+            box9.classList.add('win');
+        }, 500);
     }
     //win in box 1, 5, 9
     if((box1.value == box5.value) && (box5.value == box9.value) && (box1.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box1.classList.add('win');
+            box5.classList.add('win');
+            box9.classList.add('win');
+        }, 500);
     }
     //win in box 3, 5, 7
     if((box3.value == box5.value) && (box5.value == box7.value) && (box3.value != null)) {
         console.log(`${currentMark} win`);
         isWin = true;
+        setTimeout(function() {
+            box3.classList.add('win');
+            box5.classList.add('win');
+            box7.classList.add('win');
+        }, 500);
     }
     
 }
@@ -101,10 +142,13 @@ var handleClickBox = function(event) {
         }
     }
     if(isWin == true) {
-        setGameMessage.textContent = `${currentMark} is winner`; 
-        //win animation effect(css) goes here
-
-
+        if(currentMark == 'X') {
+            setGameMessage.textContent = `Player 1 wins.`; 
+        }
+        if(currentMark == 'O') {
+            setGameMessage.textContent = `Player 2 wins.`; 
+        }
+        
         for(var i = 0; i < boxItems.length; i++) { // disable all boxes, make them not clickable
            boxItems[i].classList.add('clicked');
         }

@@ -21,7 +21,8 @@ main {
 
 .main-container {
     display: flex;
-    margin: 2rem 0rem 2rem 10rem;
+    /*margin: 2rem 0rem 2rem 10rem;*/
+    margin: 2rem 0rem 2rem 0rem;
     /*border: 2px solid green;*/
 }
 
@@ -52,15 +53,22 @@ main {
 
 .x-clicked {
     background-image: url("../images/x.png");
-}
-
-.x-clicked img {
-    width: 50%;
+    background-repeat: no-repeat;
 }
 
 .o-clicked {
     background-image: url("../images/o.png");
+    background-repeat: no-repeat;
 }
+
+.win {
+    background-color: lightgreen;
+}
+
+
+
+
+
 
 
 
