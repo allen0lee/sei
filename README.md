@@ -10,7 +10,7 @@ Technologies used:
 Approach taken:
 1. Create 9 boxes and number them 1 to 9
 2. Click a box and add a player's symbol(an image) in the box,
-   "X" for Player 1, "O" for Player 2
+   eg. "X" for Player 1, "O" for Player 2
 3. Default setting is Player 1 moves first.
 4. Checking game winning by comparing the values of boxes that have been clicked
    eg. Win in 1st column: box1 == box2 == box3 == "O" or "X"
@@ -25,10 +25,9 @@ Approach taken:
 
 To-do items:
 1. Allow players to customize their token (X, O, name, picture, avatar etc)
-2. Keep track of multiple game rounds with a win counter
-3. Allow game customizable options, time limits, board size, game rounds, name & profiles etc
-4. Use timers to display "waiting..." messages while users are waiting to be matched
-5. Player VS AI
-6. CSS effects, animations
-7. Use LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
-8. Use web audio API and add sound effects
+2. Allow game customizable options, time limits, board size, name & profiles etc
+3. Use timers to display "waiting..." messages while users are waiting to be matched
+4. Player VS AI
+5. CSS effects, animations
+6. Use LocalStorage or SessionStorage to persist data locally to allow games to continue after page refresh or loss of internet connectivity
+7. Use web audio API and add sound effects
