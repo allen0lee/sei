@@ -15,8 +15,7 @@ var startGameBtn = document.querySelector('.start-game-btn');
 var resetGameBtn = document.querySelector('.reset-game-btn');
 var countPlayer1win = document.querySelector('.player1-win-counter');
 var countPlayer2win = document.querySelector('.player2-win-counter');
-//var setWinPlayer1 = document.querySelector('win-player-1');
-//var setWinPlayer2 = document.querySelector('win-player-2');
+var countTie = document.querySelector('.tie-counter');
 
 var isStartClicked = false;
 
@@ -35,9 +34,19 @@ var clickCounter = 0;
 
 var player1WinCounter = 0;
 var player2WinCounter = 0;
+var tieCounter = 0;
+var isRoundFinished = false;
 
 
-var countWin = function() {
+var setWinPlayer = function() {
+    if(player1ChosenMark == currentMark) {
+        setWinMessage.textContent = `Player 1`;
+    } else {
+        setWinMessage.textContent = `Player 2`;
+    }
+}
+
+var countWinRounds = function() {
     if(player1ChosenMark == currentMark) {
         player1WinCounter += 1;
         countPlayer1win.textContent = `${player1WinCounter}`;
@@ -135,7 +144,7 @@ var handleClickBox = function(event) {
     if(nextMark == 'O') {
         if(!(event.target.classList.contains('clicked'))) {
             event.target.classList.add('clicked');
-            if(!(event.target.classList.contains('x-clicked'))) { //prevent clicking an already clicked button
+            if(!(event.target.classList.contains('x-clicked'))) { //make a clicked box unchange when clicked 
                 event.target.classList.add('x-clicked');   //handle current mark
                 event.target.value = 'X';
                 currentMark = 'X';
@@ -165,57 +174,56 @@ var handleClickBox = function(event) {
 
     if(isWin == false && document.querySelectorAll('.clicked').length == boxItems.length) {
     //if(isWin == false && clickCounter == boxItems.length) {
+        if(isRoundFinished == false) {
+            tieCounter += 1;
+            isRoundFinished = true;
+        }
+        
         setTimeout(function() {
-            setWinMessage.textContent = `Tie game`;
+            countTie.textContent = `Tie Round(s): ${tieCounter}`;
         }, 500);
 
         isTie = true;
 
-        boxItems.forEach(function(item) {
+        boxItems.forEach(function(item) { //disable all boxes, make them unchange when clicked
             item.classList.add('clicked');
         });
+
+        /*
+        setTimeout(function() {
+            alert('Tie Game');
+        }, 1000);
+        */ 
     }
 
     if(isWin == true) {
         if(currentMark == 'X') {
             setTimeout(function() {
-                setWinMessage.textContent = `X`; 
+                setWinPlayer(); 
             }, 500);
 
-            setTimeout(function() {
-                countWin();
-            }, 500);
-
-            
-            //setWinPlayer1.textContent = 'X';
-            
+            if(isRoundFinished == false) {
+                setTimeout(function() {
+                    countWinRounds();
+                }, 500);
+                isRoundFinished = true;
+            }
         }
 
         if(currentMark == 'O') {
             setTimeout(function() {
-                setWinMessage.textContent = `O`; 
+                setWinPlayer(); 
             }, 500);
-            //player2WinCounter += 1;
-            ////setWinPlayer2.textContent = 'O';
-            //countPlayer2win.textContent = `${player2WinCounter}`;
-            
-            /*
-            if(player1ChosenMark == currentMark) {
-                player1WinCounter += 1;
-                countPlayer1win.textContent = `${player1WinCounter}`;
-            }
-            else {
-                player2WinCounter += 1;
-                countPlayer2win.textContent = `${player2WinCounter}`;
-            }
-            */
 
-            setTimeout(function() {
-                countWin();
-            }, 500);
+            if(isRoundFinished == false) {
+                setTimeout(function() {
+                    countWinRounds();
+                }, 500);
+                isRoundFinished = true;
+            }
         }
 
-        boxItems.forEach(function(item) {
+        boxItems.forEach(function(item) { //disable all boxes, make them unchange when clicked 
             item.classList.add('clicked');
         });
     }
@@ -260,6 +268,8 @@ var resetGame = function() {
 
     isWin = false; 
     isTie = false;
+    isRoundFinished = false;
+    countTie.textContent = null;
 }
 
 var handleStartGame = function() {
