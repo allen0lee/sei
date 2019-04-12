@@ -2,6 +2,8 @@
 
 Simple Tic Tac Toe Game
 
+https://allen0lee.github.io/sei/
+
 Technologies used:
 1. HTML
 2. CSS
