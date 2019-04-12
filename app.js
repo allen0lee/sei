@@ -257,15 +257,13 @@ var resetGame = function() {
 
     setWinMessage.textContent = null;
 
-    if(isWin == true || isTie == true) {
-        currentMark = player1ChosenMark;
-        if(currentMark == 'X') {
-            nextMark = 'O';
-        } else if(currentMark == 'O') {
-            nextMark = 'X';
-        }
+    currentMark = player1ChosenMark;
+    if(currentMark == 'X') {
+        nextMark = 'O';
+    } else if(currentMark == 'O') {
+        nextMark = 'X';
     }
-
+    
     isWin = false; 
     isTie = false;
     isRoundFinished = false;
