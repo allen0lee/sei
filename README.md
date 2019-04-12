@@ -2,7 +2,7 @@
 
 Simple Tic Tac Toe Game
 
-https://allen0lee.github.io/sei/
+https://allen0lee.github.io/sei-project1/
 
 Technologies used:
 1. HTML
