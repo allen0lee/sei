@@ -11,7 +11,11 @@ var box9 = document.querySelector('.box-9');
 var setWinMessage = document.querySelector('.win-message');
 var setPlayer1Mark = document.querySelector('.player-1');
 var setPlayer2Mark = document.querySelector('.player-2');
-var startGameBtn = document.querySelector('.start-game-btn');
+
+// var startGameBtn = document.querySelector('.start-game-btn');
+
+var vsComputerBtn = document.querySelector('.vs-computer-btn');
+
 var resetGameBtn = document.querySelector('.reset-game-btn');
 var countPlayer1win = document.querySelector('.player1-win-counter');
 var countPlayer2win = document.querySelector('.player2-win-counter');
@@ -21,12 +25,13 @@ var isStartClicked = false;
 
 var boxItems = document.querySelectorAll('.box');
 
-//var currentMark = 'X';
-//var nextMark = 'O';
+var currentMark = 'X';
+var nextMark = 'O';
+var player1ChosenMark = 'X';
 
-var currentMark = '';
-var nextMark = '';
-var player1ChosenMark = '';
+// var currentMark = '';
+// var nextMark = '';
+// var player1ChosenMark = '';
 
 var isWin = false;
 var isTie = false;
@@ -180,7 +185,7 @@ var handleClickBox = function(event) {
         }
         
         setTimeout(function() {
-            countTie.textContent = `Tie Round(s): ${tieCounter}`;
+            countTie.textContent = `Tie Rounds: ${tieCounter}`;
         }, 500);
 
         isTie = true;
@@ -229,22 +234,25 @@ var handleClickBox = function(event) {
     }
 }
 
-var choosePlayerMark = function() {
-    currentMark = prompt('Player 1, choose your mark: O or X');
-    if(currentMark == 'X') {
-        player1ChosenMark = currentMark;
-        nextMark = 'O';
-        setPlayer1Mark.textContent = 'X';
-        setPlayer2Mark.textContent = 'O';
-    } else if(currentMark == 'O') {
-        player1ChosenMark = currentMark;
-        nextMark = 'X';
-        setPlayer1Mark.textContent = 'O';
-        setPlayer2Mark.textContent = 'X';
-    } else {
-        alert('Please choose O or X');
-    }
-}
+// var choosePlayerMark = function() {
+//     currentMark = prompt('Player 1, choose your mark: O or X');
+//     if(currentMark == 'X') {
+//         player1ChosenMark = currentMark;
+//         nextMark = 'O';
+//         setPlayer1Mark.textContent = 'X';
+//         setPlayer2Mark.textContent = 'O';
+//     } else if(currentMark == 'O') {
+//         player1ChosenMark = currentMark;
+//         nextMark = 'X';
+//         setPlayer1Mark.textContent = 'O';
+//         setPlayer2Mark.textContent = 'X';
+//     } else {
+//         alert('Please choose O or X');
+//     }
+// }
+
+setPlayer1Mark.textContent = 'GUN';
+setPlayer2Mark.textContent = 'SWORD';
 
 var resetGame = function() {    
     boxItems.forEach(function(item) {
@@ -270,24 +278,25 @@ var resetGame = function() {
     countTie.textContent = null;
 }
 
-var handleStartGame = function() {
-    if(isStartClicked == false) {
-        choosePlayerMark();
-        isStartClicked = true;
-    } else if(isStartClicked == true){
-        //location.reload(); //reload the page
-        resetGame();
-        setPlayer1Mark.textContent = null;
-        setPlayer2Mark.textContent = null;
-        choosePlayerMark();
-    }
-}
+// var handleStartGame = function() {
+//     if(isStartClicked == false) {
+//         choosePlayerMark();
+//         isStartClicked = true;
+//     } else if(isStartClicked == true){
+//         //location.reload(); //reload the page
+//         resetGame();
+//         setPlayer1Mark.textContent = null;
+//         setPlayer2Mark.textContent = null;
+//         choosePlayerMark();
+//     }
+// }
 
 var handleResetGame = function() {
     resetGame();
 }
 
-startGameBtn.addEventListener('click', handleStartGame);
+// startGameBtn.addEventListener('click', handleStartGame);
+
 resetGameBtn.addEventListener('click', handleResetGame);
 
 boxItems.forEach(function(item) {

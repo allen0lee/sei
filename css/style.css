@@ -35,20 +35,20 @@ main {
 
 .first-column div {
     border: 0.5px solid black;
-    height: 150px;
-    width: 150px;
+    height: 155px;
+    width: 155px;
 }
 
 .second-column div {
     border: 0.5px solid black;
-    height: 150px;
-    width: 150px;
+    height: 155px;
+    width: 155px;
 }
 
 .third-column div {
     border: 0.5px solid black;
-    height: 150px;
-    width: 150px;
+    height: 155px;
+    width: 155px;
 }
 
 /*
@@ -62,12 +62,14 @@ main {
     background-image: url("../images/x.png");
     background-repeat: no-repeat;
     background-size: 150px 150px;
+    text-align: center;
 }
 
 .o-clicked {
     background-image: url("../images/o.png");
     background-repeat: no-repeat;
     background-size: 150px 150px;
+    text-align: center;
 }
 
 .win {
