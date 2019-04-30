@@ -15,21 +15,19 @@ body {
 }
 
 aside {
-    margin-top: 4rem;
-    width: 60%;
+    margin-top: 2.5rem;
+    width: 50%;
     /*border: 2px, solid yellow;*/
 }
 
 main {
-    width: 70%;
+    width: 50%;
     /*border: 2px, solid gray;*/
-    margin: 4rem 0rem 0rem 10rem;
+    margin: 2.5rem 0 0 12rem;
 }
 
 .main-container {
     display: flex;
-    /*margin: 2rem 0rem 2rem 10rem;*/
-    /*margin: 2rem 0rem 2rem 0rem;*/
     /*border: 2px solid green;*/
 }
 
@@ -37,26 +35,92 @@ main {
     border: 0.5px solid black;
     height: 155px;
     width: 155px;
+    border-right: none;
+    /* display: inline-block; */    /* seperate boxes in one column  */
+}
+
+.first-column div:not(:last-child) {
+    border-bottom: none;
 }
 
 .second-column div {
     border: 0.5px solid black;
     height: 155px;
     width: 155px;
+    border-right: none;
+    /* display: inline-block; */    /* seperate boxes in one column  */
+}
+
+.second-column div:not(:last-child) {
+    border-bottom: none;
 }
 
 .third-column div {
     border: 0.5px solid black;
     height: 155px;
     width: 155px;
+    /* display: inline-block; */  /*seperate boxes in one column  */
 }
 
-/*
-.box-1 {
+.third-column div:not(:last-child) {
     border-bottom: none;
-    border-right: none;
 }
-*/
+
+
+/* .first-column {                seperate boxes of 3 columns
+    margin-right: 10px;
+}
+
+.second-column {
+    margin-right: 10px;
+}
+
+.third-column {
+    margin-right: 30px;
+}
+
+.box-1 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-2 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-3 {
+    border-radius: 20px;
+}
+
+.box-4 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-5 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-6 {
+    border-radius: 20px;
+}
+
+.box-7 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-8 {
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.box-9 {
+    border-radius: 20px;
+} */
+
 
 .x-clicked {
     background-image: url("../images/x.png");

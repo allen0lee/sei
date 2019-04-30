@@ -185,7 +185,7 @@ var handleClickBox = function(event) {
         }
         
         setTimeout(function() {
-            countTie.textContent = `Tie Rounds: ${tieCounter}`;
+            countTie.textContent = `Tie Game: ${tieCounter}`;
         }, 500);
 
         isTie = true;
