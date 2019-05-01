@@ -26,7 +26,7 @@ main {
     margin: 2.5rem 0 0 12rem;
 }
 
-.main-container {
+.game-container {
     display: flex;
     /*border: 2px solid green;*/
 }
@@ -36,6 +36,7 @@ main {
     height: 155px;
     width: 155px;
     border-right: none;
+    background-color: none;
     /* display: inline-block; */    /* seperate boxes in one column  */
 }
 
@@ -48,6 +49,7 @@ main {
     height: 155px;
     width: 155px;
     border-right: none;
+    background-color: none;
     /* display: inline-block; */    /* seperate boxes in one column  */
 }
 
@@ -59,6 +61,7 @@ main {
     border: 0.5px solid black;
     height: 155px;
     width: 155px;
+    background-color: none;
     /* display: inline-block; */  /*seperate boxes in one column  */
 }
 
@@ -141,8 +144,8 @@ main {
 }
 
 button {
-    background: #4479BA;
-    color: #FFF;
+    background: #3D72A4;
+    color: white;
     font-family: 'Raleway';
     font-size: 1.5rem;
     text-align: center;
@@ -152,7 +155,6 @@ button {
     border-radius: 10px;
     box-shadow: 2px 2px lightgray;
   }
-
 
 
 

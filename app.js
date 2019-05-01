@@ -13,21 +13,25 @@ var setPlayer1Mark = document.querySelector('.player-1');
 var setPlayer2Mark = document.querySelector('.player-2');
 
 // var startGameBtn = document.querySelector('.start-game-btn');
-
 var vsComputerBtn = document.querySelector('.vs-computer-btn');
+var vsPlayerBtn = document.querySelector('.vs-player-btn');
 
 var resetGameBtn = document.querySelector('.reset-game-btn');
 var countPlayer1win = document.querySelector('.player1-win-counter');
 var countPlayer2win = document.querySelector('.player2-win-counter');
 var countTie = document.querySelector('.tie-counter');
 
-var isStartClicked = false;
+// var isStartClicked = false;
+var enableVsComputer = false;
+var enableVsPlayer = false;
 
-var boxItems = document.querySelectorAll('.box');
+var boxItems = document.querySelectorAll('.box'); //array of 9 box dom objects
 
 var currentMark = 'X';
 var nextMark = 'O';
 var player1ChosenMark = 'X';
+
+var computerMark = 'O';
 
 // var currentMark = '';
 // var nextMark = '';
@@ -42,7 +46,7 @@ var player2WinCounter = 0;
 var tieCounter = 0;
 var isRoundFinished = false;
 
-
+// only works for 2 players
 var setWinPlayer = function() {
     if(player1ChosenMark == currentMark) {
         setWinMessage.textContent = `Player 1`;
@@ -51,6 +55,7 @@ var setWinPlayer = function() {
     }
 }
 
+// only works for 2 players
 var countWinRounds = function() {
     if(player1ChosenMark == currentMark) {
         player1WinCounter += 1;
@@ -146,32 +151,14 @@ var judgeWin = function() {
 }
 
 var handleClickBox = function(event) {
-    if(nextMark == 'O') {
-        if(!(event.target.classList.contains('clicked'))) {
-            event.target.classList.add('clicked');
-            if(!(event.target.classList.contains('x-clicked'))) { //make a clicked box unchange when clicked 
-                event.target.classList.add('x-clicked');   //handle current mark
-                event.target.value = 'X';
-                currentMark = 'X';
-                nextMark = 'X';
-            }
-        }
-    }
 
-    if(nextMark == 'X') {
-        if(!(event.target.classList.contains('clicked'))) {
-            event.target.classList.add('clicked');
-            if((!event.target.classList.contains('o-clicked'))) {
-                event.target.classList.add('o-clicked');
-                event.target.value = 'O';
-                currentMark = 'O';
-                nextMark = 'O';
-            }
-        }
+    if(enableVsPlayer == true) {
+        twoPlayers();
     }
-
-    //clickCounter = clickCounter + 1;
-    //console.log(clickCounter);
+    else if(enableVsComputer == true) {
+        vsComputer();
+    }
+    
 
     if(isWin == false) {
         judgeWin();
@@ -251,9 +238,9 @@ var handleClickBox = function(event) {
 //     }
 // }
 
-setPlayer1Mark.textContent = 'GUN';
-setPlayer2Mark.textContent = 'SWORD';
 
+
+// only works for 2 players
 var resetGame = function() {    
     boxItems.forEach(function(item) {
         item.classList.remove('win');
@@ -291,11 +278,89 @@ var resetGame = function() {
 //     }
 // }
 
+var handleVsComputer = function() {
+    enableVsComputer = true;
+    enableVsPlayer = false;
+}
+
+var handleVsPlayer = function() {
+    enableVsPlayer = true;
+    enableVsComputer = false;
+}
+
+var twoPlayers = function() {
+    setPlayer1Mark.textContent = 'GUN';
+    setPlayer2Mark.textContent = 'SWORD';
+
+    if(nextMark == 'O') {
+        if(!(event.target.classList.contains('clicked'))) {
+            event.target.classList.add('clicked');
+            if(!(event.target.classList.contains('x-clicked'))) { //make a clicked box unchange when clicked 
+                event.target.classList.add('x-clicked');   //handle current mark
+                event.target.value = 'X';
+                currentMark = 'X';
+                nextMark = 'X';
+            }
+        }
+    }
+
+    if(nextMark == 'X') {
+        if(!(event.target.classList.contains('clicked'))) {
+            event.target.classList.add('clicked');
+            if((!event.target.classList.contains('o-clicked'))) {
+                event.target.classList.add('o-clicked');
+                event.target.value = 'O';
+                currentMark = 'O';
+                nextMark = 'O';
+            }
+        }
+    }
+
+    //clickCounter = clickCounter + 1;
+    //console.log(clickCounter);
+}
+
+
+var vsComputer = function() {
+    // player moves first, player is X
+    if(!(event.target.classList.contains('clicked'))) {
+        event.target.classList.add('clicked');
+        if(!(event.target.classList.contains('x-clicked'))) { //make a clicked box unchange when clicked 
+            event.target.classList.add('x-clicked');   //handle current mark
+            event.target.value = 'X';
+            // currentMark = 'X';    
+        }
+        clickCounter = clickCounter + 1;
+    }
+
+    // stupid computer 
+    var loop = false;
+    // computer always goes second
+    if(clickCounter == 1 || clickCounter == 3 || clickCounter == 5 || clickCounter == 7 ) {
+        do {
+            var randomMove = Math.floor(Math.random() * 9);
+
+            if((boxItems[randomMove].value != 'X') && (boxItems[randomMove].value != 'O')) {
+                boxItems[randomMove].classList.add('o-clicked');
+                boxItems[randomMove].value = 'O'
+                clickCounter = clickCounter + 1;
+                loop = true;
+            } else {
+                loop = false;
+            }
+        } while(loop == false);
+    }
+}
+
+
+
 var handleResetGame = function() {
     resetGame();
 }
 
 // startGameBtn.addEventListener('click', handleStartGame);
+vsComputerBtn.addEventListener('click', handleVsComputer);
+vsPlayerBtn.addEventListener('click', handleVsPlayer);
 
 resetGameBtn.addEventListener('click', handleResetGame);
 
